@@ -1,0 +1,294 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Audio",
+    "description": "This is a audio api",
+    "termsOfService": "http://stack.network/terms-of-service.html",
+    "version": "v1"
+  },
+  "host": "audio.kinlane.com.us-east.audioapi.api",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "retrieves all audio",
+        "description": "pulls all audio, with filter by keyword",
+        "operationId": "getAudio",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "a text query to search across audio",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "audio response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/audio"
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/errorModel"
+            }
+          }
+        },
+        "tags": [
+          "Audio"
+        ]
+      },
+      "post": {
+        "summary": "add audio",
+        "description": "add a new audio",
+        "operationId": "addAudio",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "name of the audio",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "description of the audio",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "description": "url of the audio",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "thumbnailUrl",
+            "in": "query",
+            "description": "thumbnailUrl of the audio",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "creator",
+            "in": "query",
+            "description": "creator of the audio",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "audio response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/audio"
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/errorModel"
+            }
+          }
+        },
+        "tags": [
+          "audio"
+        ]
+      }
+    },
+    "/{id}": {
+      "get": {
+        "summary": "Retrieve a audio using its ID",
+        "description": "Returns the audio detail",
+        "operationId": "getAudio",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id for the audio, notice this is in the path, not a query variable",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "audio response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/audio"
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/errorModel"
+            }
+          }
+        },
+        "tags": [
+          "audio"
+        ]
+      },
+      "put": {
+        "summary": "update audio",
+        "description": "update audio",
+        "operationId": "updateAudio",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "name of the audio",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "description of the audio",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "description": "url of the audio",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "thumbnailUrl",
+            "in": "query",
+            "description": "thumbnailUrl of the audio",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "creator",
+            "in": "query",
+            "description": "creator of the audio",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "audio response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/audio"
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/errorModel"
+            }
+          }
+        },
+        "tags": [
+          "audio"
+        ]
+      },
+      "delete": {
+        "summary": "delete audio",
+        "description": "deletes an audio",
+        "operationId": "deleteAudio",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "unique id for the audio",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "audio response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/audio"
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/errorModel"
+            }
+          }
+        },
+        "tags": [
+          "audio"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "audio": {
+      "properties": {
+        "id": {
+          "description": "unique id for the audio",
+          "type": "string"
+        },
+        "name": {
+          "description": "name of the audio",
+          "type": "string"
+        },
+        "description": {
+          "description": "description for the audio",
+          "type": "string"
+        },
+        "url": {
+          "description": "url for the audio contact",
+          "type": "string"
+        },
+        "thumbnailUrl": {
+          "description": "thumbnail url for the audio contact",
+          "type": "string"
+        },
+        "creator": {
+          "description": "creator for the audio contact",
+          "type": "string"
+        }
+      }
+    },
+    "errorModel": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
