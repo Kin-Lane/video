@@ -1,5 +1,5 @@
 {
-  "name": "Stack Network - Video",
+  "name": "Kin Lane -  Video",
   "description": "This is my default video API, using it to manage posts in a single API. It is a Stack Network API resource, with supporting docker container for the API.",
   "video": "https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-video.png",
   "tags": [
