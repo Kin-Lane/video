@@ -1,292 +1,487 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Audio",
-    "description": "This is a audio api",
+    "title": "Video",
+    "description": "This is my video API for keeping track of video files I create, and find across the internet. It doesn't store the video currently, just provides a pointer to where it exists, and some meta data to support.",
     "termsOfService": "http://stack.network/terms-of-service.html",
     "version": "v1"
   },
-  "host": "audio.kinlane.com.us-east.audioapi.api",
+  "host": "video.api.kinlane.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "produces": [
     "application/json"
   ],
   "paths": {
-    "/": {
+    "/video/": {
       "get": {
-        "summary": "retrieves all audio",
-        "description": "pulls all audio, with filter by keyword",
-        "operationId": "getAudio",
+        "summary": "retrieves all video",
+        "description": "pulls all video, with filter by keyword",
+        "operationId": "getVideo",
         "parameters": [
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the API",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the API",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "query",
             "in": "query",
-            "description": "a text query to search across audio",
-            "required": true,
+            "description": "a text query to search across video",
+            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "audio response",
+            "description": "video response",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/audio"
+                "$ref": "#/definitions/video"
               }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "schema": {
-              "$ref": "#/definitions/errorModel"
             }
           }
         },
         "tags": [
-          "Audio"
+          "Video"
         ]
       },
       "post": {
-        "summary": "add audio",
-        "description": "add a new audio",
-        "operationId": "addAudio",
+        "summary": "add video",
+        "description": "add a new video",
+        "operationId": "addVideo",
         "parameters": [
           {
+            "name": "appid",
+            "in": "formData",
+            "description": "your appid for accessing the API",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "formData",
+            "description": "your appkey for accessing the API",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "name",
-            "in": "query",
-            "description": "name of the audio",
+            "in": "formData",
+            "description": "name of the video",
             "required": true,
             "type": "string"
           },
           {
             "name": "description",
-            "in": "query",
-            "description": "description of the audio",
-            "required": true,
+            "in": "formData",
+            "description": "description of the video",
+            "required": false,
             "type": "string"
           },
           {
             "name": "url",
-            "in": "query",
-            "description": "url of the audio",
+            "in": "formData",
+            "description": "url of the video",
             "required": true,
             "type": "string"
           },
           {
             "name": "thumbnailUrl",
             "in": "query",
-            "description": "thumbnailUrl of the audio",
-            "required": true,
+            "description": "thumbnailUrl of the video",
+            "required": false,
             "type": "string"
           },
           {
             "name": "creator",
             "in": "query",
-            "description": "creator of the audio",
-            "required": true,
+            "description": "creator of the video",
+            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "audio response",
+            "description": "video response",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/audio"
+                "$ref": "#/definitions/video"
               }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "schema": {
-              "$ref": "#/definitions/errorModel"
             }
           }
         },
         "tags": [
-          "audio"
+          "Video"
         ]
       }
     },
-    "/{id}": {
+    "/video/{video_id}/tags/": {
       "get": {
-        "summary": "Retrieve a audio using its ID",
-        "description": "Returns the audio detail",
-        "operationId": "getAudio",
+        "summary": "retrieve video tags",
+        "description": "Returns the tags for an video",
+        "operationId": "getvideoTags",
         "parameters": [
           {
-            "name": "id",
+            "name": "video_id",
             "in": "path",
-            "description": "id for the audio, notice this is in the path, not a query variable",
+            "description": "id for video",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "id"
+          },
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the video",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the video",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "audio response",
+            "description": "People Tags Response",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/audio"
+                "$ref": "#/definitions/tag"
               }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "schema": {
-              "$ref": "#/definitions/errorModel"
             }
           }
         },
         "tags": [
-          "audio"
+          "Tags"
+        ]
+      },
+      "post": {
+        "summary": "add tag to video",
+        "description": "add tag for video",
+        "operationId": "addPeopleTag",
+        "parameters": [
+          {
+            "name": "video_id",
+            "in": "path",
+            "description": "id for the video",
+            "required": true,
+            "type": "integer",
+            "format": "id"
+          },
+          {
+            "name": "appid",
+            "in": "formData",
+            "description": "your appid for accessing the video",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "formData",
+            "description": "your appkey for accessing the video",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "formData",
+            "description": "tag name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "People Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/tag"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tags"
+        ]
+      }
+    },
+    "/video/{video_id}/tags/{tag}": {
+      "delete": {
+        "summary": "delete a video tag",
+        "description": "deletes a tag applied to video",
+        "operationId": "deletevideoTag",
+        "parameters": [
+          {
+            "name": "video_id",
+            "in": "path",
+            "description": "id for the video",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the video",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the video",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "path",
+            "description": "tag to remove from video",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "People Tag Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/tag"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tags"
+        ]
+      }
+    },
+    "/video/{video_id}/": {
+      "get": {
+        "summary": "Retrieve a video using its ID",
+        "description": "Returns the video detail",
+        "operationId": "getVideo",
+        "parameters": [
+          {
+            "name": "video_id",
+            "in": "path",
+            "description": "unique id for the video",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the API",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the API",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "video response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/video"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Video"
         ]
       },
       "put": {
-        "summary": "update audio",
-        "description": "update audio",
-        "operationId": "updateAudio",
+        "summary": "update video",
+        "description": "update video",
+        "operationId": "updateVideo",
         "parameters": [
           {
+            "name": "video_id",
+            "in": "path",
+            "description": "unique id for the video",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "appid",
+            "in": "formData",
+            "description": "your appid for accessing the API",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "formData",
+            "description": "your appkey for accessing the API",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "name",
-            "in": "query",
-            "description": "name of the audio",
+            "in": "formData",
+            "description": "name of the video",
             "required": true,
             "type": "string"
           },
           {
             "name": "description",
-            "in": "query",
-            "description": "description of the audio",
-            "required": true,
+            "in": "formData",
+            "description": "description of the video",
+            "required": false,
             "type": "string"
           },
           {
             "name": "url",
-            "in": "query",
-            "description": "url of the audio",
+            "in": "formData",
+            "description": "url of the video",
             "required": true,
             "type": "string"
           },
           {
             "name": "thumbnailUrl",
             "in": "query",
-            "description": "thumbnailUrl of the audio",
-            "required": true,
+            "description": "thumbnailUrl of the video",
+            "required": false,
             "type": "string"
           },
           {
             "name": "creator",
             "in": "query",
-            "description": "creator of the audio",
-            "required": true,
+            "description": "creator of the video",
+            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "audio response",
+            "description": "video response",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/audio"
+                "$ref": "#/definitions/video"
               }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "schema": {
-              "$ref": "#/definitions/errorModel"
             }
           }
         },
         "tags": [
-          "audio"
+          "Video"
         ]
       },
       "delete": {
-        "summary": "delete audio",
-        "description": "deletes an audio",
-        "operationId": "deleteAudio",
+        "summary": "delete video",
+        "description": "deletes an video",
+        "operationId": "deleteVideo",
         "parameters": [
           {
-            "name": "id",
+            "name": "video_id",
             "in": "path",
-            "description": "unique id for the audio",
+            "description": "unique id for the video",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the API",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the API",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "audio response",
+            "description": "video response",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/audio"
+                "$ref": "#/definitions/video"
               }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "schema": {
-              "$ref": "#/definitions/errorModel"
             }
           }
         },
         "tags": [
-          "audio"
+          "Video"
         ]
       }
     }
   },
   "definitions": {
-    "audio": {
+    "video": {
       "properties": {
-        "id": {
-          "description": "unique id for the audio",
-          "type": "string"
+        "video_id": {
+          "description": "unique id for the video",
+          "type": "integer"
         },
         "name": {
-          "description": "name of the audio",
+          "description": "name of the video",
           "type": "string"
         },
         "description": {
-          "description": "description for the audio",
+          "description": "description for the video",
           "type": "string"
         },
         "url": {
-          "description": "url for the audio contact",
+          "description": "url for the video contact",
           "type": "string"
         },
         "thumbnailUrl": {
-          "description": "thumbnail url for the audio contact",
+          "description": "thumbnail url for the video contact",
           "type": "string"
         },
         "creator": {
-          "description": "creator for the audio contact",
+          "description": "creator for the video contact",
           "type": "string"
         }
       }
     },
-    "errorModel": {
-      "required": [
-        "code",
-        "message"
-      ],
+    "tag": {
       "properties": {
-        "code": {
+        "tag_id": {
+          "description": "id for the tag",
           "type": "integer",
-          "format": "int32"
+          "format": "id"
         },
-        "message": {
+        "tag": {
+          "description": "text tag",
           "type": "string"
+        },
+        "api_count": {
+          "description": "number of items api with tag",
+          "type": "integer"
         }
       }
     }
