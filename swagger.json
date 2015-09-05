@@ -17,9 +17,9 @@
   "paths": {
     "/video/": {
       "get": {
-        "summary": "retrieves all video",
-        "description": "pulls all video, with filter by keyword",
-        "operationId": "getVideo",
+        "summary": "retrieve all video",
+        "description": "retrieve all video",
+        "operationId": "getVideos",
         "parameters": [
           {
             "name": "appid",
@@ -278,7 +278,7 @@
     "/video/{video_id}/": {
       "get": {
         "summary": "Retrieve a video using its ID",
-        "description": "Returns the video detail",
+        "description": "Retrieve a video using its ID",
         "operationId": "getVideo",
         "parameters": [
           {

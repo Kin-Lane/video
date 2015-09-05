@@ -27,6 +27,14 @@
         {
           "type": "Swagger",
           "url": "https://kin-lane.github.io/video/swagger.json"
+        },
+        {
+          "type": "x-postman",
+          "url": "https://kin-lane.github.io/video/postman.json"
+        },
+        {
+          "type": "x-api-science",
+          "url": "https://kin-lane.github.io/video/status/"
         }
       ],
       "contact": [
@@ -146,7 +154,7 @@
     {
       "name": "Tool API",
       "url": "https://kin-lane.github.io/tool/apis.json"
-    }   
+    }
   ],
   "maintainers": [
     {
