@@ -1,4 +1,4 @@
-videoapi
+imageapi
 ========
 
-videoapi
+imageapi
