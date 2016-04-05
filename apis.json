@@ -1,20 +1,20 @@
 [{
-	"name": "Curated API",
-	"description": "As I look through the thousands of tweets, blog posts, and other items I read from across the API space, I curate them as part of my regular research. I put them into each research bucket, and make them availble via each reserch project. You can access via this API, and use in real-time as I curate and manage each week.",
-	"image": "https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-abundance.png",
+	"name": "Kin Lane Video API",
+	"description": "Like the audio and image APIs, I want a central place to track on the video content I'm creating and curating from across the space. I'm not a big video watcher or creator, but understand its importance in the space. I'm working to evolve the video portion of what I do, create more content and get more organized with the curation of video content. This video API is how I am looking to do that. This API is not as active as some of my other APis, but will soon change.",
+	"image": "https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-video.png",
 	"x-open-ranking": "0",
-	"tags": ["Kin Lane Curated APi"],
+	"tags": ["Kin Lane Video API"],
 	"created": "2016-04-04",
 	"modified": "2016-04-04",
-	"url": "https://kin-lane.github.io/curated/"
+	"url": "https://kin-lane.github.io/video/"
 	"specificationVersion": "0.14",
 	"apis": [{
-		"name": "Kin Lane Curated",
-		"description": "<p>As I look through the thousands of tweets, blog posts, and other items I read from across the API space, I curate them as part of my regular research. I put them into each research bucket, and make them availble via each reserch project. You can access via this API, and use in real-time as I curate and manage each week.</p>",
+		"name": "Kin Lane Video API",
+		"description": "This is my master org.",
 		"image": "http://kinlane-productions.s3.amazonaws.com/api-evangelist-site/company/logos/kin.png",
-		"humanURL": "https://kin-lane.github.io/curated/",
-		"baseURL": "https://kin-lane.github.io/curated/",
-		"tags": ["Kin Lane Curated APi"],
+		"humanURL": "",
+		"baseURL": "",
+		"tags": ["Kin Lane Video API"],
 		"properties": [{
 			"type": "x-openapi-spec",
 			"url": "api-commons/openapi-spec.json"
@@ -110,7 +110,7 @@
 	}],
 	"include": [{
 		"name": "Parent",
-		"url": "https://kin-lane.github.io/curated//apis.yaml"
+		"url": "https://kin-lane.github.io/video//apis.yaml"
 	}],
 	"maintainers": [{
 		"FN": "Kin Lane",
