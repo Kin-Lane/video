@@ -1,12 +1,12 @@
 - swagger: "2.0"
   info:
-    title: Curated
-    description: This is my API for curated my API news from across the Internet. These
-      are stories I've flagged as important after reading blog feeds, Twitter, Reddit,
-      and numerous other sources.
-    termsOfService: http://kinlane.com/terms-of-service.html
-    version: v1
-  host: curated.api.kinlane.com
+    title: Video
+    description: This is my video API for keeping track of video files I create, and
+      find across the internet. It doesn't store the video currently, just provides
+      a pointer to where it exists, and some meta data to support.
+    termsOfService: http://stack.network/terms-of-service.html
+    version: ~
+  host: video.api.kinlane.com
   basePath: /
   schemes:
   - http
@@ -15,610 +15,150 @@
   consumes:
   - application/json
   paths:
-    /curated/:
+    /video/:
       get:
-        summary: retrieves all curated items
-        description: retrieves all curated items
-        operationId: getCurated
+        summary: retrieve all video
+        description: retrieve all video
+        operationId: getVideos
         parameters:
         - in: query
           name: appid
           description: your appid for accessing the API
-          type: string
-          format: string
         - in: query
           name: appkey
           description: your appkey for accessing the API
-          type: string
-          format: string
         - in: query
           name: query
-          description: a text query to search across curated items
-          type: string
-          format: string
+          description: a text query to search across video
         responses:
           200:
             description: OK
         tags:
-        - Curated
+        - Videos
         security: []
       post:
-        summary: add curated
-        description: add curated
-        operationId: addCurated
+        summary: add video
+        description: add a new video
+        operationId: addVideo
         parameters:
-        - in: query
+        - in: formData
           name: appid
           description: your appid for accessing the API
-          type: string
-          format: string
-        - in: query
+        - in: formData
           name: appkey
           description: your appkey for accessing the API
-          type: string
-          format: string
         - in: query
-          name: author
-          description: author of the curated item
-          type: string
-          format: string
+          name: creator
+          description: creator of the video
+        - in: formData
+          name: description
+          description: description of the video
+        - in: formData
+          name: name
+          description: name of the video
         - in: query
-          name: details
-          description: raw details of the curated item
-          type: string
-          format: string
-        - in: query
-          name: domain
-          description: domain of the curated item
-          type: string
-          format: string
-        - in: query
-          name: item_date
-          description: date applied to the curated item
-          type: string
-          format: string
-        - in: query
-          name: link
-          description: url for the curated item
-          type: string
-          format: string
-        - in: query
-          name: original_date
-          description: original date of the curated item
-          type: string
-          format: string
-        - in: query
-          name: processed
-          description: has the curated item been processed
-          type: string
-          format: string
-        - in: query
-          name: public_comment
-          description: public comment on the curated item
-          type: string
-          format: string
-        - in: query
-          name: resolved_url
-          description: resolved url for the item
-          type: string
-          format: string
-        - in: query
-          name: screenshot_url
-          description: screenshot url for the curated item
-          type: string
-          format: string
-        - in: query
-          name: status
-          description: status of the curated item
-          type: string
-          format: string
-        - in: query
-          name: title
-          description: title of the curated item
-          type: string
-          format: string
-        - in: query
-          name: weekly_roundup
-          description: is curated included in weekly roundup
-          type: string
-          format: string
-        - in: query
-          name: weekly_summary
-          description: is curated item included in weekly summary
-          type: string
-          format: string
+          name: thumbnailUrl
+          description: thumbnailUrl of the video
+        - in: formData
+          name: url
+          description: url of the video
         responses:
           200:
             description: OK
         tags:
-        - Curated
+        - Videos
         security: []
-    /curated/byweek/:
-      get:
-        summary: curated items by week
-        description: curated items by week
-        operationId: getCuratedByWeek
-        parameters:
-        - in: query
-          name: appid
-          description: your appid for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: appkey
-          description: your appkey for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: week
-          description: the week number
-          type: string
-          format: string
-        responses:
-          200:
-            description: OK
-        tags:
-        - Curated
-        security: []
-    /curated/byweek/archive/:
-      get:
-        summary: curated items by week archived
-        description: curated items by week archived
-        operationId: getCuratedByWeekPublished
-        parameters:
-        - in: query
-          name: appid
-          description: your appid for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: appkey
-          description: your appkey for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: week
-          description: the week number
-          type: string
-          format: string
-        responses:
-          200:
-            description: OK
-        tags:
-        - Curated
-        security: []
-    /curated/byweek/published/:
-      get:
-        summary: curated items by week published
-        description: curated items by week published
-        operationId: getCuratedByWeekPublished
-        parameters:
-        - in: query
-          name: appid
-          description: your appid for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: appkey
-          description: your appkey for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: week
-          description: the week number
-          type: string
-          format: string
-        responses:
-          200:
-            description: OK
-        tags:
-        - Curated
-        security: []
-    /curated/byweek/review/:
-      get:
-        summary: curated item by week for review
-        description: curated item by week for review
-        operationId: getCuratedByWeekReview
-        parameters:
-        - in: query
-          name: appid
-          description: your appid for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: appkey
-          description: your appkey for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: week
-          description: the week number
-          type: string
-          format: string
-        responses:
-          200:
-            description: OK
-        tags:
-        - Curated
-        security: []
-    /curated/tags/:
-      get:
-        summary: retrieves all tags for curated
-        description: retrieves all tags for curated
-        operationId: getCuratedTags
-        parameters:
-        - in: query
-          name: appid
-          description: your appid for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: appkey
-          description: your appkey for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: query
-          description: a text query to search across curated items
-          type: string
-          format: string
-        responses:
-          200:
-            description: OK
-        tags:
-        - Tags
-        security: []
-    /curated/tags/byweek/:
-      get:
-        summary: curated tags by week
-        description: curated tags by week
-        operationId: getCuratedTagsByWeek
-        parameters:
-        - in: query
-          name: appid
-          description: your appid for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: appkey
-          description: your appkey for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: week
-          description: the week to retrieve tags by
-          type: string
-          format: string
-        responses:
-          200:
-            description: OK
-        tags:
-        - Tags
-        security: []
-    /curated/tags/byweek/{tag}/curated/:
-      get:
-        summary: curated by tag and week
-        description: curated by tag and week
-        operationId: getCuratedTagCurated
-        parameters:
-        - in: query
-          name: appid
-          description: your appid for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: appkey
-          description: your appkey for accessing the API
-          type: string
-          format: string
-        - in: path
-          name: tag
-          description: the tag to filter by
-          type: string
-          format: string
-        - in: query
-          name: week
-          description: the week to filter by, defaults to this week
-          type: string
-          format: string
-        responses:
-          200:
-            description: OK
-        tags:
-        - Tags
-        security: []
-    /curated/tags/{tag}:
+    /video/{video_id}/:
       delete:
-        summary: delete curated tag
-        description: delete curated tag
-        operationId: deleteCuratedTag
+        summary: delete video
+        description: deletes an video
+        operationId: deleteVideo
         parameters:
         - in: query
           name: appid
           description: your appid for accessing the API
-          type: string
-          format: string
         - in: query
           name: appkey
           description: your appkey for accessing the API
-          type: string
-          format: string
         - in: path
-          name: tag
-          description: Tag to be removed
-          type: string
-          format: string
+          name: video_id
+          description: unique id for the video
         responses:
           200:
             description: OK
         tags:
-        - Tags
-        security: []
-    /curated/{curated_id}:
-      delete:
-        summary: delete a curated item
-        description: delete a curated item
-        operationId: deleteCurated
-        parameters:
-        - in: query
-          name: appid
-          description: your appid for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: appkey
-          description: your appkey for accessing the API
-          type: string
-          format: string
-        - in: path
-          name: curated_id
-          description: id for the curated item
-          type: string
-          format: string
-        responses:
-          200:
-            description: OK
-        tags:
-        - Curated
+        - Videos
         security: []
       get:
-        summary: retrieve a curated item
-        description: retrieve a curated item
-        operationId: getCurated
+        summary: get video using id
+        description: Retrieve a video using its ID
+        operationId: getVideo
         parameters:
         - in: query
           name: appid
           description: your appid for accessing the API
-          type: string
-          format: string
         - in: query
           name: appkey
           description: your appkey for accessing the API
-          type: string
-          format: string
         - in: path
-          name: curated_id
-          description: id for the curated id
-          type: string
-          format: string
+          name: video_id
+          description: unique id for the video
         responses:
           200:
             description: OK
         tags:
-        - Curated
+        - Videos
         security: []
       put:
-        summary: updatea a curated item
-        description: updatea a curated item
-        operationId: updateCurated
+        summary: update video
+        description: update video
+        operationId: updateVideo
         parameters:
-        - in: query
+        - in: formData
           name: appid
           description: your appid for accessing the API
-          type: string
-          format: string
-        - in: query
+        - in: formData
           name: appkey
           description: your appkey for accessing the API
-          type: string
-          format: string
         - in: query
-          name: author
-          description: author of the curated item
-          type: string
-          format: string
+          name: creator
+          description: creator of the video
+        - in: formData
+          name: description
+          description: description of the video
+        - in: formData
+          name: name
+          description: name of the video
+        - in: query
+          name: thumbnailUrl
+          description: thumbnailUrl of the video
+        - in: formData
+          name: url
+          description: url of the video
         - in: path
-          name: curated_id
-          description: id of the curated item
-          type: string
-          format: string
-        - in: query
-          name: details
-          description: raw details of the curated item
-          type: string
-          format: string
-        - in: query
-          name: domain
-          description: domain of the curated item
-          type: string
-          format: string
-        - in: query
-          name: item_date
-          description: date applied to the curated item
-          type: string
-          format: string
-        - in: query
-          name: link
-          description: url for the curated item
-          type: string
-          format: string
-        - in: query
-          name: original_date
-          description: original date of the curated item
-          type: string
-          format: string
-        - in: query
-          name: processed
-          description: has the curated item been processed
-          type: string
-          format: string
-        - in: query
-          name: public_comment
-          description: public comment on the curated item
-          type: string
-          format: string
-        - in: query
-          name: resolved_url
-          description: resolved url for the item
-          type: string
-          format: string
-        - in: query
-          name: screenshot_url
-          description: screenshot url for the curated item
-          type: string
-          format: string
-        - in: query
-          name: status
-          description: status of the curated item
-          type: string
-          format: string
-        - in: query
-          name: title
-          description: title of the curated item
-          type: string
-          format: string
-        - in: query
-          name: weekly_roundup
-          description: is curated included in weekly roundup
-          type: string
-          format: string
-        - in: query
-          name: weekly_summary
-          description: is curated item included in weekly summary
-          type: string
-          format: string
+          name: video_id
+          description: unique id for the video
         responses:
           200:
             description: OK
         tags:
-        - Curated
+        - Videos
         security: []
-    /curated/{curated_id}/notes/:
+    /video/{video_id}/tags/:
       get:
-        summary: get curated items notes
-        description: get curated items notes
-        operationId: getCuratedNotes
+        summary: retrieve video tags
+        description: Returns the tags for an video
+        operationId: getvideoTags
         parameters:
         - in: query
           name: appid
-          description: your appid for accessing the API
-          type: string
-          format: string
+          description: your appid for accessing the video
         - in: query
           name: appkey
-          description: your appkey for accessing the API
-          type: string
-          format: string
+          description: your appkey for accessing the video
         - in: path
-          name: curated_id
-          description: id for the curated item
-          type: string
-          format: string
-        responses:
-          200:
-            description: OK
-        tags:
-        - Notes
-        security: []
-      post:
-        summary: add a curated note
-        description: add a curated note
-        operationId: addCuratedNote
-        parameters:
-        - in: query
-          name: appid
-          description: your appid for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: appkey
-          description: your appkey for accessing the API
-          type: string
-          format: string
-        - in: path
-          name: curated_id
-          description: id for the curated item
-          type: string
-          format: string
-        - in: query
-          name: note
-          description: the full text of note
-          type: string
-          format: string
-        - in: query
-          name: type
-          description: type of the note
-          type: string
-          format: string
-        responses:
-          200:
-            description: OK
-        tags:
-        - Notes
-        security: []
-    /curated/{curated_id}/notes/{note_id}:
-      delete:
-        summary: delete a curated note
-        description: delete a curated note
-        operationId: deleteCuratedNote
-        parameters:
-        - in: query
-          name: appid
-          description: your appid for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: appkey
-          description: your appkey for accessing the API
-          type: string
-          format: string
-        - in: path
-          name: curated_id
-          description: id for the curated item
-          type: string
-          format: string
-        - in: path
-          name: note_id
-          description: id for the note
-          type: string
-          format: string
-        responses:
-          200:
-            description: OK
-        tags:
-        - Notes
-        security: []
-    /curated/{curated_id}/tags/:
-      get:
-        summary: get curated tags
-        description: get curated tags
-        operationId: getCuratedTags
-        parameters:
-        - in: query
-          name: appid
-          description: your appid for accessing the API
-          type: string
-          format: string
-        - in: query
-          name: appkey
-          description: your appkey for accessing the API
-          type: string
-          format: string
-        - in: path
-          name: curated_id
-          description: id for curated item
-          type: string
-          format: string
+          name: video_id
+          description: id for video
         responses:
           200:
             description: OK
@@ -626,62 +166,46 @@
         - Tags
         security: []
       post:
-        summary: add curated tag
-        description: add curated tag
-        operationId: addCuratedTag
+        summary: add tag to video
+        description: add tag for video
+        operationId: addPeopleTag
         parameters:
-        - in: query
+        - in: formData
           name: appid
-          description: your appid for accessing the API
-          type: string
-          format: string
-        - in: query
+          description: your appid for accessing the video
+        - in: formData
           name: appkey
-          description: your appkey for accessing the API
-          type: string
-          format: string
-        - in: path
-          name: curated_id
-          description: id for curated item
-          type: string
-          format: string
-        - in: query
+          description: your appkey for accessing the video
+        - in: formData
           name: tag
           description: tag name
-          type: string
-          format: string
+        - in: path
+          name: video_id
+          description: id for the video
         responses:
           200:
             description: OK
         tags:
         - Tags
         security: []
-    /curated/{curated_id}/tags/{tag}:
+    /video/{video_id}/tags/{tag}:
       delete:
-        summary: delete a curated item
-        description: delete a curated item
-        operationId: deleteCurated
+        summary: delete a video tag
+        description: deletes a tag applied to video
+        operationId: deletevideoTag
         parameters:
         - in: query
           name: appid
-          description: your appid for accessing the API
-          type: string
-          format: string
+          description: your appid for accessing the video
         - in: query
           name: appkey
-          description: your appkey for accessing the API
-          type: string
-          format: string
-        - in: path
-          name: curated_id
-          description: id for the curated item
-          type: string
-          format: string
+          description: your appkey for accessing the video
         - in: path
           name: tag
-          description: tag to upate on the curated item
-          type: string
-          format: string
+          description: tag to remove from video
+        - in: path
+          name: video_id
+          description: id for the video
         responses:
           200:
             description: OK
@@ -689,67 +213,34 @@
         - Tags
         security: []
   definitions:
-  - properties:
-      curated_id:
-        description: This is a default description.
-        type: get
-      title:
-        description: This is a default description.
-        type: get
-      link:
-        description: This is a default description.
-        type: get
-      item_date:
-        description: This is a default description.
-        type: get
-      details:
-        description: This is a default description.
-        type: get
-      status:
-        description: This is a default description.
-        type: get
-      public_comment:
-        description: This is a default description.
-        type: get
-      original_date:
-        description: This is a default description.
-        type: get
-      author:
-        description: This is a default description.
-        type: get
-      processed:
-        description: This is a default description.
-        type: get
-      domain:
-        description: This is a default description.
-        type: get
-      screenshot_url:
-        description: This is a default description.
-        type: get
-      resolved_url:
-        description: This is a default description.
-        type: get
-      weekly_summary:
-        description: This is a default description.
-        type: get
-      weekly_roundup:
-        description: This is a default description.
-        type: get
-      tag_id:
-        description: This is a default description.
-        type: get
-      tag:
-        description: This is a default description.
-        type: get
-      curated_count:
-        description: This is a default description.
-        type: get
-      note_id:
-        description: This is a default description.
-        type: get
-      type:
-        description: This is a default description.
-        type: get
-      note:
-        description: This is a default description.
-        type: get
+    video:
+      properties:
+        video_id:
+          description: This is a default description.
+          type: delete
+        name:
+          description: This is a default description.
+          type: delete
+        description:
+          description: This is a default description.
+          type: delete
+        url:
+          description: This is a default description.
+          type: delete
+        thumbnailUrl:
+          description: This is a default description.
+          type: delete
+        creator:
+          description: This is a default description.
+          type: delete
+    tag:
+      properties:
+        tag_id:
+          description: This is a default description.
+          type: delete
+        tag:
+          description: This is a default description.
+          type: delete
+        api_count:
+          description: This is a default description.
+          type: delete
