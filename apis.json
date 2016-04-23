@@ -1,4 +1,4 @@
-[{
+{
 	"name": "Kin Lane Video API",
 	"description": "Like the audio and image APIs, I want a central place to track on the video content I'm creating and curating from across the space. I'm not a big video watcher or creator, but understand its importance in the space. I'm working to evolve the video portion of what I do, create more content and get more organized with the curation of video content. This video API is how I am looking to do that. This API is not as active as some of my other APis, but will soon change.",
 	"image": "https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-video.png",
@@ -6,7 +6,7 @@
 	"tags": ["Kin Lane Video API"],
 	"created": "2016-04-04",
 	"modified": "2016-04-04",
-	"url": "https://kin-lane.github.io/video/"
+	"url": "https://kin-lane.github.io/video/",
 	"specificationVersion": "0.14",
 	"apis": [{
 		"name": "Kin Lane Video API",
@@ -117,4 +117,4 @@
 		"x-twitter": "apievangelist",
 		"email": "info@apievangelist.com"
 	}]
-}]
+}
